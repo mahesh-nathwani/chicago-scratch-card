@@ -18,7 +18,7 @@ export const routes: Routes = [
         canMatch: [authGuard()],
     },
     {
-        path: 'settings',
+        path: 'cashback',
         loadChildren: async () => (await import('@pages/settings')).routes,
         canMatch: [authGuard()],
     },

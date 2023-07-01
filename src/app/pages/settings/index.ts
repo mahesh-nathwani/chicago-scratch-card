@@ -7,7 +7,7 @@ export const routes: Routes = [
         loadComponent: async () => (await import('./accessibility/accessibility.component')).AccessibilityComponent,
     },
     {
-        path: 'account',
+        path: '',
         title: 'Account settings',
         loadComponent: async () => (await import('./account/account.component')).AccountComponent,
     },

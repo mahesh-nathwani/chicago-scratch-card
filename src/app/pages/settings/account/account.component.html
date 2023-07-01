@@ -1,1 +1,7 @@
-<p>account works!</p>
+<!-- {{percent}} -->
+<div #canvas class="w-full s-container">
+  <canvas id="myCanvas" width="300" height="100" class="mx-auto">
+    Your browser does not support the canvas element.
+  </canvas>
+  <button class="btn btn-primary" *ngIf="showButton" (click)="goHome()">Back to Home</button>
+</div>

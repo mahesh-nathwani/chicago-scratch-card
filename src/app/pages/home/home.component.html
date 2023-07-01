@@ -1,34 +1,6 @@
-<section>
+<!-- <section>
     <h1>Home</h1>
 
-    <h2 class="mb-4">Choose your theme</h2>
-
-    <div class="flex flex-wrap gap-3 mb-6">
-        <button
-            class="min-w-[150px] btn {{ currentTheme === 'system' ? 'btn-primary' : 'btn-secondary' }}"
-            (click)="handleThemeChange('system')"
-        >
-            <span class="icon-[carbon--screen] text-2xl mr-2"></span>
-
-            System
-        </button>
-        <button
-            class="min-w-[150px] btn {{ currentTheme === 'light' ? 'btn-primary' : 'btn-secondary' }}"
-            (click)="handleThemeChange('light')"
-        >
-            <span class="icon-[carbon--sun] text-2xl mr-2"></span>
-
-            Light
-        </button>
-        <button
-            class="min-w-[150px] btn {{ currentTheme === 'dark' ? 'btn-primary' : 'btn-secondary' }}"
-            (click)="handleThemeChange('dark')"
-        >
-            <span class="icon-[carbon--moon] text-2xl mr-2"></span>
-
-            Dark
-        </button>
-    </div>
 
     <div class="mt-12">
         <h3 class="h5">Settings</h3>
@@ -92,4 +64,47 @@
             </li>
         </ul>
     </div>
-</section>
+</section> -->
+
+<div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
+    <div class="sm:mx-auto sm:w-full sm:max-w-sm">
+      <img class="mx-auto h-10 w-auto" src="assets/logo1-ai.png" alt="Chicago Pizza">
+      <h3 class="mt-6 text-center text-xl leading-9 tracking-tight text-gray-600">Enter details to win cashback upto ₹50</h3>
+    </div>
+  
+    <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+      <form class="space-y-6" #contactForm="ngForm" (ngSubmit)="onSubmit(contactForm)">
+        <div>
+          <label for="name" class="block text-sm font-medium leading-6 text-gray-900">Full Name</label>
+          <div class="mt-2">
+            <input id="name" name="name" type="text" autocomplete="text" required class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" #name="ngModel" ngModel>
+          </div>
+        </div>
+  
+        <div class="mt-6">
+          <div class="flex items-center justify-between">
+            <label for="mobile" class="block text-sm font-medium leading-6 text-gray-900">Mobile Number</label>
+
+          </div>
+          <div class="mt-10">
+            <input id="mobile" name="mobile" type="text" autocomplete="false" required class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" #mobile="ngModel" ngModel>
+          </div>
+        </div>
+
+        <div class="mt-6">
+            <div class="flex items-center justify-between">
+              <label for="amount" class="block text-sm font-medium leading-6 text-gray-900">Bill Amount</label>
+  
+            </div>
+            <div class="mt-10">
+              <input id="amount" name="amount" type="text" autocomplete="false" required class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" #amount="ngModel" ngModel>
+            </div>
+          </div>
+  
+        <div class="mt-6">
+          <button type="submit" [disabled]="!name.valid && !mobile.valid && !amount.valid" [ngClass]="{'btn-disabled': !name.valid && !mobile.valid && !amount.valid}" class="flex w-full justify-center rounded-md btn-primary px-3 py-3 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 btn">Get Cashback</button>
+        </div>
+      </form>
+  
+    </div>
+  </div>
