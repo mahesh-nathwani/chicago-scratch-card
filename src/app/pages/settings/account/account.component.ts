@@ -394,10 +394,10 @@ export class AccountComponent {
     resetCard() {
       // this.clearCanvas();
       console.log('Scratch Card Initilization started');
-      let amount = Number(this.weightedRandom() * 0.01 * this.amount).toFixed(2);
+      let amount = Math.round(Number(this.weightedRandom() * 0.01 * this.amount));
       console.log(`Calculated amount: ${amount}`);
-      if (Number(amount) < MIN_VALUE) amount = MIN_VALUE.toString();
-      if (Number(amount) > MAX_VALUE) amount = MAX_VALUE.toString();
+      if (Number(amount) < MIN_VALUE) amount = MIN_VALUE;
+      if (Number(amount) > MAX_VALUE) amount = MAX_VALUE;
       const defaults = {
         scratchType: SCRATCH_TYPE.SPRAY,
         containerWidth: 300,
