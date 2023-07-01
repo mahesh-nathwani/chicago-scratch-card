@@ -102,7 +102,7 @@ export class AccountComponent {
   
     canvasImageLoad (): Promise<any> {
       const randomNumber = '?'+Math.random();
-      const img = 'assets/logo1-ai.png';
+      const img = 'assets/logo12-ai.png';
       return new Promise((resolve: any, reject: any) => {
         this.loadImage(img).then((img: unknown) => {
           this.ctx.drawImage(img as CanvasImageSource, 0, 0, 300, 300);

@@ -14,6 +14,8 @@ import { Subject, takeUntil } from 'rxjs';
 export class HomeComponent implements OnInit, OnDestroy {
     currentTheme!: AppTheme | null;
     url = 'https://script.google.com/macros/s/AKfycbxP_Pq3pH9YdthseVokWFSQEFx_hIQmMfYHi9ZXmZh8DCyalAAkMVcTAAOYj3C5DBKQ/exec';
+    showLoading = false;
+    loadingText = 'Generating Scratch Card...'
     private readonly _themeService = inject(ThemeService);
     
     private readonly _router = inject(Router);
@@ -38,9 +40,10 @@ export class HomeComponent implements OnInit, OnDestroy {
     }
 
     onSubmit(form: any) {
-        console.log(form.value);
+        // console.log(form.value);
         const data = new URLSearchParams(form.value).toString();
-        console.log(data);
+        this.showLoading = true;
+        // console.log(data);
         this._http.get(this.url + `?${data}`, form.value).subscribe({
             next: data => {
                 console.log(data);
@@ -48,6 +51,7 @@ export class HomeComponent implements OnInit, OnDestroy {
             },
             error: error => {
                 // this.errorMessage = error.message;
+                this.loadingText = 'Error in generating scratch card. Please try again later.'
                 console.error('There was an error!', error);
             }
         });
