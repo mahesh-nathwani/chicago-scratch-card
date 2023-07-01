@@ -10,7 +10,7 @@ export const routes: Routes = [
     {
         path: '',
         loadChildren: async () => (await import('@pages/home')).routes,
-        canMatch: [authGuard()],
+        canMatch: [authGuard({requiresAuthentication: false})],
     },
     {
         path: 'users/:username',
@@ -20,7 +20,7 @@ export const routes: Routes = [
     {
         path: 'cashback',
         loadChildren: async () => (await import('@pages/settings')).routes,
-        canMatch: [authGuard()],
+        canMatch: [authGuard({requiresAuthentication: false})],
     },
     {
         path: '**',
