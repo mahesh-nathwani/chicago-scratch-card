@@ -13,7 +13,7 @@ import { Subject, takeUntil } from 'rxjs';
 })
 export class HomeComponent implements OnInit, OnDestroy {
     currentTheme!: AppTheme | null;
-
+    url = 'https://script.google.com/macros/s/AKfycbxP_Pq3pH9YdthseVokWFSQEFx_hIQmMfYHi9ZXmZh8DCyalAAkMVcTAAOYj3C5DBKQ/exec';
     private readonly _themeService = inject(ThemeService);
     
     private readonly _router = inject(Router);
@@ -39,7 +39,9 @@ export class HomeComponent implements OnInit, OnDestroy {
 
     onSubmit(form: any) {
         console.log(form.value);
-        this._http.post('https://script.google.com/macros/s/AKfycbxDmHHgoWUiKlNzMooMpOzfcKPJakB6SYgXQ-U1dDd5C6KPNeb5DRwjtZtNe0jCmBNy/exec', form.value).subscribe({
+        const data = new URLSearchParams(form.value).toString();
+        console.log(data);
+        this._http.get(this.url + `?${data}`, form.value).subscribe({
             next: data => {
                 console.log(data);
                 this._router.navigate(['/cashback']);

@@ -50,7 +50,7 @@ export const authGuard = (options: AuthGuardOptions = defaultAuthGuardOptions())
         }
 
         return options.requiresAuthentication
-            ? router.createUrlTree(['/'], {
+            ? router.createUrlTree(['/auth/login'], {
                   queryParams: {
                       returnUrl: segments.map((s) => s.path).join('/'),
                   },
