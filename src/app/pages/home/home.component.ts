@@ -47,7 +47,7 @@ export class HomeComponent implements OnInit, OnDestroy {
         this._http.get(this.url + `?${data}`, form.value).subscribe({
             next: data => {
                 console.log(data);
-                this._router.navigate(['/cashback']);
+                this._router.navigate([`/cashback`], { queryParams: { amount: form.value.amount } });
             },
             error: error => {
                 // this.errorMessage = error.message;

@@ -1,13 +1,16 @@
 import { CommonModule } from '@angular/common';
 import { Component, ElementRef, ViewChild, inject } from '@angular/core';
-import { Router, RouterModule } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 
 enum SCRATCH_TYPE {
     BRUSH,
     SPRAY, 
     CIRCLE
   }
-const WEIGHTS = {0:0.001, 1: 0.05, 2: 0.05, 3: 0.05, 4: 0.05, 5: 0.1, 6: 0.1, 7: 0.1, 8: 0.1, 9: 0.1, 10: 0.1, 11: 0.01, 12: 0.01, 13: 0.01, 14: 0.01, 15: 0.01, 16: 0.01, 17: 0.01, 18: 0.01, 19: 0.01, 20: 0.01, 21: 0.01, 22: 0.01, 23: 0.01, 24: 0.01, 25: 0.01, 26: 0.01, 27: 0.01, 28: 0.01, 29: 0.01, 50: 0.001, 45: 0.002, 40: 0.002, 35: 0.002, 30: 0.002};
+const WEIGHTS = {2: 0.15, 3: 0.15, 4: 0.2, 5: 0.2, 6: 0.1, 7: 0.1, 8: 0.1};
+const MIN_VALUE = 5;
+const MAX_VALUE = 70;
+  // const WEIGHTS = {0:0.001, 1: 0.05, 2: 0.05, 3: 0.05, 4: 0.05, 5: 0.1, 6: 0.1, 7: 0.1, 8: 0.1, 9: 0.1, 10: 0.1, 11: 0.01, 12: 0.01, 13: 0.01, 14: 0.01, 15: 0.01, 16: 0.01, 17: 0.01, 18: 0.01, 19: 0.01, 20: 0.01, 21: 0.01, 22: 0.01, 23: 0.01, 24: 0.01, 25: 0.01, 26: 0.01, 27: 0.01, 28: 0.01, 29: 0.01, 50: 0.001, 45: 0.002, 40: 0.002, 35: 0.002, 30: 0.002};
   interface SC_CONFIG {
     scratchType: SCRATCH_TYPE;
     containerWidth: number;
@@ -43,6 +46,7 @@ export class AccountComponent {
     showButton = false;
     private callbackDone: Boolean;
     private readyToClear: Boolean;
+    amount = 100;
   
     public zone: {top: number, left: number};
     private position: number[];
@@ -53,12 +57,16 @@ export class AccountComponent {
     private scratchType: SCRATCH_TYPE;
   
     private readonly _router = inject(Router);
+    private readonly _route = inject(ActivatedRoute);
   
     constructor() {
     }
   
     ngOnInit() {
-      this.resetCard();
+        this._route.queryParams.subscribe(p => {
+            this.amount = Number(p['amount']) || 100;
+            this.resetCard();
+        });
     }
 
     weightedRandom() {
@@ -386,6 +394,10 @@ export class AccountComponent {
     resetCard() {
       // this.clearCanvas();
       console.log('Scratch Card Initilization started');
+      let amount = Number(this.weightedRandom() * 0.01 * this.amount).toFixed(2);
+      console.log(`Calculated amount: ${amount}`);
+      if (Number(amount) < MIN_VALUE) amount = MIN_VALUE.toString();
+      if (Number(amount) > MAX_VALUE) amount = MAX_VALUE.toString();
       const defaults = {
         scratchType: SCRATCH_TYPE.SPRAY,
         containerWidth: 300,
@@ -400,7 +412,7 @@ export class AccountComponent {
         imageForwardSrc: 'https://masth0.github.io/ScratchCard/_nuxt/img/result.0a4b6c7.png',
         imageBackgroundSrc: 'https://masth0.github.io/ScratchCard/_nuxt/img/result.0a4b6c7.png',
         clearZoneRadius: 0,
-        htmlBackground: `Wohoo! You've won ₹ ${this.weightedRandom()}.`,
+        htmlBackground: `Wohoo! You've won ₹ ${amount}.`,
         enabledPercentUpdate: true,
         cursor: {
           cur: 'string',
